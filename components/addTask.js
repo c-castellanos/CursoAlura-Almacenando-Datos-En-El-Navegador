@@ -12,6 +12,10 @@ export const addTask = (evento) => { //Esta funcion addTask, recibe un evento, e
     const date = calendar.value; //Valor de fecha en formato sin estandarizar
     const dateFormat = moment(date).format('DD/MM/YYYY'); //Haciendo uso de libreria 'moment', le aplicamos el formato deseado a la fecha ingresada por el usuario. Con dicho formato guardaremos ese dato
 
+    if(value === '' || date === ''){
+        return;
+    };
+
     input.value = ''; //Limpia el input despues de agregar una tarea a la lista
     calendar.value = ''; //Limpia calendario despues de agregar una tarea a la lista
 
