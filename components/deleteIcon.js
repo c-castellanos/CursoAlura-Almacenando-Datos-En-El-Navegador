@@ -1,13 +1,21 @@
-const deleteIcon = () => {
+import { displayTasks } from "./displayTasks.js";
+
+displayTasks
+const deleteIcon = (id) => {
   const i = document.createElement('i');
   i.classList.add('fas', 'fa-trash-alt', 'trashIcon', 'icon');
-  i.addEventListener('click', deleteTask);
+  i.addEventListener('click', () => deleteTask(id));
   return i;
 };
 
-const deleteTask = (event) => {
-  const parent = event.target.parentElement;
-  parent.remove();
+const deleteTask = (id) => {
+  const li = document.querySelector("[data-list]");
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  const index = tasks.findIndex((item) => item.id === id); //Devuelve la posicion del arreglo en la que se encuentra
+  tasks.splice(index, 1);
+  li.innerHTML = "";
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  displayTasks();
 };
 
 export default deleteIcon;
